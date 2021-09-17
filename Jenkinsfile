@@ -1,9 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage("build") {
             steps {
-                sh'Building the application'
+                echo'Building the application'
+                sh'app.py'
             }
         }
     }
