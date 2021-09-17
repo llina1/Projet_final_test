@@ -4,16 +4,10 @@ pipeline {
         stage("build") {
             steps {
                 echo'Building the application'
+                sh 'python3 app.py'
 
             }
         }
     }
 }
 
-stage('Run Program') {
-    dir('sources') {
-       steps {
-           sh 'python3 app.py'
-       }
-    }
-}
