@@ -12,7 +12,7 @@ pipeline {
 
 stage("Run script") {
             steps {
-                sh "py ./app.py"
+                sh "python3 ./app.py"
             }
         } 
     }  
