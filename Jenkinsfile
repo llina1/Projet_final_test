@@ -8,6 +8,13 @@ pipeline {
 
             }
         }
-    }
-}
+    
 
+
+stage("Run script") {
+            steps {
+                sh "python ./app.py"
+            }
+        } 
+    }  
+} 
