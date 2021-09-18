@@ -1,3 +1,4 @@
+import flask
 from flask import Flask
 from routes import configure_routes
 
