@@ -1,5 +1,3 @@
-source bin/activate
-virtualenv flask
 import flask
 from flask import Flask
 from routes import configure_routes
