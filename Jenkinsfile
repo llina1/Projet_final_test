@@ -9,13 +9,6 @@
                 }
             }
     
-
-
-            stage("Run script") {
-                steps {
-                    sh "python3 ./app.py"
-                }
-            } 
             stage("Ansible - Deploy"){
                 steps{ 
                 git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
@@ -29,6 +22,11 @@
 
                     )
                 } 
+            } 
+            stage("Run script") {
+                steps {
+                    sh "python3 ./app.py"
+                }
             } 
         }  
     } 
