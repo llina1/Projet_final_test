@@ -17,6 +17,7 @@
                 }
             } 
             stage("Ansible - Deploy"){
+                steps{ 
                 git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
                 sh "mkdir roles"
                 sh "ansible-galaxy install --roles -r requirements.yml"
@@ -26,7 +27,8 @@
                     hostKeyCkecking: false
                     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
 
-                )
+                    )
+                } 
             } 
         }  
     } 
