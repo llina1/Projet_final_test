@@ -20,7 +20,7 @@
     //hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
 
-                    )   
+                    //)   
 }
     pipeline {
         agent any
