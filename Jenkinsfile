@@ -11,6 +11,7 @@
     }
 } catch (e) {
     echo 'Time out on optional step. Node down?'
+    node { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "mkdir roles"
     sh "ansible-galaxy install --roles -r requirements.yml"
@@ -19,8 +20,8 @@
     //playbook:" <nom du fichier .yml>",
     //hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
-
-                    //)   
+   
+}                //)   
 }
     pipeline {
         agent any
