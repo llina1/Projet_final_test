@@ -3,6 +3,20 @@
     timeout(time: 1, unit: 'SECONDS') {
         node('my node') {
             echo 'Node is up. Performing optional step.'
+                stage("Ansible - Deploy"){
+                steps{ 
+                git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+                sh "mkdir roles"
+                sh "ansible-galaxy install --roles -r requirements.yml"
+                ansiblePlaybook (
+                    colorized: true,
+                    //playbook:" <nom du fichier .yml>",
+                    //hostKeyCkecking: false
+                    //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
+
+                    )
+                } 
+            }    
         }
     }
     node('my node') {
