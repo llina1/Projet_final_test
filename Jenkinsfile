@@ -38,11 +38,11 @@
         }  
     } /***/
 def var = ''
-def name_nodes =''
+def name_nodes = ''
 pipeline {
   agent any
   stages {
-    stage('one') {
+     stage('one') {
       steps {
         echo "env.NAME_NODE"
 
@@ -53,20 +53,20 @@ pipeline {
         }
         echo "${var}" 
       }
-    }
-    stage('two') {
+    
+     stage('two') {
       steps {
         echo "${var}" // prints 'hotness'
-      }
-    }
-    // this stage is skipped due to the when expression, so nothing is printed
-    stage('three') {
+            }
+        }
+        // this stage is skipped due to the when expression, so nothing is printed
+     stage('three') {
       when {
         expression { var = ' ' }
       }
       steps {
         echo "three: node down?"
-      }
+        }
+     } 
     }
-  }
 }
