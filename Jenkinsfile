@@ -24,7 +24,7 @@
             }
         
     
-            stage("Ansible - Deploy"){
+            /***stage("Ansible - Deploy"){
                 steps{ 
                 git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
                 sh "mkdir roles"
@@ -37,7 +37,7 @@
 
                     )
                 } 
-            }            
+            }    /***/        
         }  
     } 
 
