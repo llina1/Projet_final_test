@@ -11,6 +11,8 @@
 } catch (e) {
     echo 'Time out on optional step. Node down?'
 }
+
+
     pipeline {
         agent any
         stages {
@@ -35,10 +37,7 @@
 
                     )
                 } 
-            } 
-                    
-                }
-            } 
+            }            
         }  
     } 
 
