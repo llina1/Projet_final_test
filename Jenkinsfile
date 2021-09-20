@@ -1,4 +1,4 @@
-    def branchName=env.BRANCH_NAME
+    /**def branchName=env.BRANCH_NAME
     def test_node = false
     def node_name = env.NODE_NAME 
 
@@ -13,8 +13,9 @@
     }
 } catch (e) {
     echo 'Time out on optional step. Node down?'
-    node { 
+    node ('node_name') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+   
     //sh "mkdir roles"
     //sh "ansible-galaxy install --roles -r requirements.yml"
     //ansiblePlaybook (
@@ -25,25 +26,6 @@
    
 }                //)   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     pipeline {
         agent any
         stages {
@@ -54,5 +36,37 @@
                 }
             }     
         }  
-    } 
+    } /***/
+def var = ''
+def name_nodes =''
+pipeline {
+  agent any
+  stages {
+    stage('one') {
+      steps {
+        echo "env.NAME_NODE"
 
+          // OPTION 2: set variable by grabbing output from script
+          name_nodes = sh "(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')"
+          sh "echo $name_nodes > file.txt" 
+          var = sh "grep '$name_nodes' file.txt"
+        }
+        echo "${var}" 
+      }
+    }
+    stage('two') {
+      steps {
+        echo "${var}" // prints 'hotness'
+      }
+    }
+    // this stage is skipped due to the when expression, so nothing is printed
+    stage('three') {
+      when {
+        expression { var = ' ' }
+      }
+      steps {
+        echo "three: node down?"
+      }
+    }
+  }
+}
