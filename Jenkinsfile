@@ -1,7 +1,26 @@
     def branchName=env.BRANCH_NAME
+    try {
+    timeout(time: 1, unit: 'SECONDS') {
+        node('my node') {
+            echo 'Node is up. Performing optional step.'
+        }
+    }
+    node('my node') {
+        echo 'This is an optional step.'
+    }
+} catch (e) {
+    echo 'Time out on optional step. Node down?'
+}
     pipeline {
         agent any
         stages {
+            stage("build") {
+                steps {
+                echo'Building the application'
+                sh "python3 ./app.py"
+                }
+            }
+        
     
             stage("Ansible - Deploy"){
                 steps{ 
@@ -17,16 +36,7 @@
                     )
                 } 
             } 
-
-            stage("build") {
-                steps {
-                echo'Building the application'
-                }
-            }
-            
-            stage("Run script") {
-                steps {
-                    sh "python3 ./app.py"
+                    
                 }
             } 
         }  
