@@ -44,12 +44,10 @@ pipeline {
   stages {
      stage('one') {
       steps {
-        echo "env.NAME_NODE"
-
-          // OPTION 2: set variable by grabbing output from script
-          name_nodes = sh "(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')"
-          sh "echo $name_nodes > file.txt" 
-          var = sh "grep '$name_nodes' file.txt"
+            echo "env.NAME_NODE"
+            name_nodes = sh(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')
+            sh "echo $name_nodes > file.txt" 
+            var = sh(grep '$name_nodes' file.txt)
         }
         echo "${var}" 
       }
