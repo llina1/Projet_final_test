@@ -1,12 +1,12 @@
     def branchName=env.BRANCH_NAME
     try {
     timeout(time: 1, unit: 'SECONDS') {
-        node('my node') {
+        node('laure-l') {
             echo 'Node is up. Performing optional step.'
                   
         }
     }
-    node('my node') {
+    node('laure-l') {
         echo 'This is an optional step.'
     }
 } catch (e) {
