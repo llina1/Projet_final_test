@@ -11,7 +11,9 @@
     }
 } catch (e) {
     echo 'Time out on optional step. Node down?'
-    stage("Ansible - Deploy"){
+    pipeline{ 
+        stages{
+            stage("Ansible - Deploy"){
                 steps{ 
                 git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
                 sh "mkdir roles"
@@ -25,9 +27,10 @@
                     )
                 } 
             }  
+        }
+    }  
+
 }
-
-
     pipeline {
         agent any
         stages {
