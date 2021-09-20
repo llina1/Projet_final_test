@@ -3,7 +3,15 @@
     timeout(time: 1, unit: 'SECONDS') {
         node('my node') {
             echo 'Node is up. Performing optional step.'
-                stage("Ansible - Deploy"){
+                  
+        }
+    }
+    node('my node') {
+        echo 'This is an optional step.'
+    }
+} catch (e) {
+    echo 'Time out on optional step. Node down?'
+    stage("Ansible - Deploy"){
                 steps{ 
                 git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
                 sh "mkdir roles"
@@ -16,14 +24,7 @@
 
                     )
                 } 
-            }    
-        }
-    }
-    node('my node') {
-        echo 'This is an optional step.'
-    }
-} catch (e) {
-    echo 'Time out on optional step. Node down?'
+            }  
 }
 
 
