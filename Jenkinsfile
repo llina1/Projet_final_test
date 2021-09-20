@@ -32,7 +32,7 @@
                 ansiblePlaybook (
                     colorized: true,
                     //playbook:" <nom du fichier .yml>",
-                    hostKeyCkecking: false
+                    //hostKeyCkecking: false
                     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
 
                     )
