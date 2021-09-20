@@ -1,6 +1,6 @@
     def branchName=env.BRANCH_NAME
     def test_node = false
-    def node_name = "${NODE_NAME}" 
+    def node_name = env.NODE_NAME 
 
     try {
     timeout(time: 5, unit: 'SECONDS') {
