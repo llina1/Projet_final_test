@@ -1,12 +1,14 @@
     def branchName=env.BRANCH_NAME
+    def test_node = false
+    def node_name = "${NODE_NAME}" 
+
     try {
     timeout(time: 5, unit: 'SECONDS') {
-        node('laure-l') {
-            echo 'Node is up. Performing optional step.'
-                  
+        node('node_name') {
+            echo 'Node is up. Performing optional step.'       
         }
     }
-    node('laure-l') {
+    node('node_name') {
         echo 'This is an optional step.'
     }
 } catch (e) {
@@ -23,6 +25,25 @@
    
 }                //)   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     pipeline {
         agent any
         stages {
@@ -31,23 +52,7 @@
                 echo'Building the application'
                 sh "python3 ./app.py"
                 }
-            }
-        
-    
-            /***stage("Ansible - Deploy"){
-                steps{ 
-                git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-                sh "mkdir roles"
-                sh "ansible-galaxy install --roles -r requirements.yml"
-                ansiblePlaybook (
-                    colorized: true,
-                    //playbook:" <nom du fichier .yml>",
-                    //hostKeyCkecking: false
-                    //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
-
-                    )
-                } 
-            }    /***/        
+            }     
         }  
     } 
 
