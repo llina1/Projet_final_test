@@ -39,6 +39,7 @@
     } /***/
 def var = ''
 def name_nodes = ''
+def current_node = ''
 pipeline {
   agent any
   stages {
@@ -48,7 +49,8 @@ pipeline {
             //name_nodes = sh(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')
             name_nodes = $nodes
             sh "echo $name_nodes > file.txt" 
-            var = sh(grep ${env.NAME_NODE} file.txt)
+            current_node = ${env.NAME_NODE} 
+            var = sh(grep "$current_node" file.txt)
         }
         echo "${var}" 
       }
