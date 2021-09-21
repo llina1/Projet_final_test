@@ -42,7 +42,7 @@ if (status != 200 && status != 201) {
     ansiblePlaybook (
     colorized: true,
     playbook:" <nom du fichier .yml>",
-    hostKeyChecking: false
+    hostKeyChecking: false,
     inventory: "<chemin du fichier dans git>"
     )
 }                   
