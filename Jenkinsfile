@@ -91,10 +91,5 @@ if (status != 200 && status != 201) {
             }     
         }  
     }
+}
 
-pipeline {
-    node('master'){
-
-    } 
-
-} 
