@@ -19,15 +19,18 @@ pipeline{
         stage('testing'){
             steps{
                 echo 'testing node master before lauching'
-                node('master')
+                node('master'){
+                    steps{
                 status = sh(returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1')
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
                                                     } 
-                 }
-                         }   
-        }
+                         }
+                             }   
+                  }
+                         }
     }
+}  
 
 
 
