@@ -4,28 +4,28 @@
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
     def master2 = "72.16.254.254"
-    def masterP
+    def masterP = "http://"+"$backup1"
 pipeline{
        agent any
     stages{
         stage('build'){
             steps{
-                echo 'building the app' 
+                echo 'building the app'  
+                echo masterP
                 sh "python3 ./app.py"
                  }
             }
          
 
-        stage ('testing'){
+        /***stage ('testing'){
             steps{
                 echo 'testing node master before lauching'
                 node('master')
-                masterP="http://"+"$backup1"
-                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $masterP'
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
     
-    sh vagrant destroy [backup1]
+    vagrant destroy []  
 
             } 
         }   
@@ -81,8 +81,7 @@ if (status != 200 && status != 201) {
     node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
     }
-} 
-/***catch (e) {
+} catch (e) {
     echo 'Time out on optional step. Node down?'
     node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
@@ -95,7 +94,7 @@ if (status != 200 && status != 201) {
     hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
     )
-        }   /***/              
+        }/***/                  
     }   
 }  
                 
