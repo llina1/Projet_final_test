@@ -1,10 +1,11 @@
-    def branchName=env.BRANCH_NAME
-    def test_node = false
-    def node_name = env.NODE_NAME 
+    def branchName=env.BRANCH_NAME 
     def status = 0
     def backup1 = "http://72.16.254.251"
-    def backup2 = "http://72.16.254.252"
+    def master1 = "http://72.16.254.252"
+    def backup2 = "http://72.16.254.253"
+    def master2 = "http://72.16.254.254"
 pipeline{
+    agent any
     stages{
         stage('build'){
             steps{
@@ -14,20 +15,27 @@ pipeline{
             }
         } 
 
-        stage ('testing'){
+        /***stage ('testing'){
             steps{
                 echo 'testing node master before lauching'
                 node('master')
-                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url3'
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
+    
+    vagrant destroy []  
+
             } 
         }   
         stage('testing'){
             echo 'Testing Jenkins in node master'
             steps{
+                node('master'){
                 status= sh jennkins --version
             } 
+
+            } 
+            
         } 
 
 
@@ -60,7 +68,8 @@ if (status != 200 && status != 201) {
     } 
 
 
-        stage('testing curent node running')
+        stage('testing')
+         echo'testing current node running'
          steps {
         timeout(time: 5, unit: 'SECONDS') {
         node('${env.NODE_NAME}') {
@@ -83,7 +92,7 @@ if (status != 200 && status != 201) {
     hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
     )
-        }                  
+        }/***/                  
     }   
 }  
                 
