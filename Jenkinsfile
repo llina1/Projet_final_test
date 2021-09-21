@@ -3,8 +3,8 @@
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
     def master2 = "72.16.254.254"
-    def var = "http://"
-    def masterP = var + backup1
+    def url0 = "http://"
+    def url1 = var + backup1
     
 pipeline{
        agent any
@@ -22,10 +22,11 @@ pipeline{
             steps{
                 script{ 
                 //echo 'testing node master before lauching'
-                int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $masterP"
+                int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
+                echo "$status"
                 if (status != 200 && status != 201){ 
-    error("Returned status code = $status when calling $masterP")
-    //sh "vagrant destroy $backup1"
+    error("Returned status code = $status when calling $url1")
+    script: sh "vagrant destroy $backup1"
                     } 
                 } 
             }
