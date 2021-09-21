@@ -48,7 +48,7 @@ pipeline {
             //name_nodes = sh(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')
             name_nodes = $nodes
             sh "echo $name_nodes > file.txt" 
-            var = sh(grep 'env.NAME_NODE' file.txt)
+            var = sh(grep '${env.NAME_NODE}' file.txt)
         }
         echo "${var}" 
       }
