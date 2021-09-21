@@ -50,7 +50,7 @@ pipeline {
             name_nodes = $nodes
             sh "echo $name_nodes > file.txt" 
             current_node = ${env.NAME_NODE} 
-            var = sh(grep "$current_node" file.txt)
+            var = readfile(file.txt) | sh 'grep "$current_node" file.txt'
         }
         echo "${var}" 
       }
