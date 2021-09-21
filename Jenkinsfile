@@ -6,9 +6,11 @@
     def backup2 = "http://72.16.254.252"
 Pipeline{
     stages{
-        stage('build')
+        stage('build'){
             steps{
                 echo 'building the app'
+                sh "python3 ./app.py"
+                }
             }
         } 
 
@@ -78,18 +80,12 @@ if (status != 200 && status != 201) {
     hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
     )
-}                  
-}
-    pipeline {
-        agent any
-        stages {
-            stage("build") {
-                steps {
-                echo'Building the application'
-                sh "python3 ./app.py"
-                }
-            }     
-        }  
-    }
-}
+        }                  
+    }   
+}  
+                
+            
+         
+    
+
 
