@@ -1,7 +1,7 @@
     def branchName=env.BRANCH_NAME
     def test_node = false
     def node_name = env.NODE_NAME 
-    def response = 0
+    def status = 0
     def backup1 = "http://72.16.254.251"
     def backup2 = "http://72.16.254.252"
 Pipeline{
@@ -12,13 +12,29 @@ Pipeline{
             }
         } 
 
+        stage ('testing node master before lauching'){
+            steps{
+                node('master')
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url3'
+                if (status != 200 && status != 201) {
+    error("Returned status code = $response when calling $url1")
+            } 
+        }   
+        stage('Testing node master'){
+            steps{
+                status= sh jennkins --version
+            } 
+        } 
+
+
+
         stage('testing running node'){ 
             steps{ 
                 node('master'){
-                    response = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url'
+                    status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url'
 
 if (status != 200 && status != 201) {
-    error("Returned status code = $response when calling $url1")
+    error("Returned status code = $status when calling $url1")
     node ('master') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
    sh "mkdir roles"
