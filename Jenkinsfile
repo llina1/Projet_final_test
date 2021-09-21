@@ -47,10 +47,12 @@ pipeline {
       steps {
             echo "env.NAME_NODE"
             //name_nodes = sh(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')
-            name_nodes = $nodes
-            sh "echo $name_nodes > file.txt" 
-            current_node = ${env.NAME_NODE} 
-            var = readfile(file.txt)
+            node { 
+                name_nodes = $nodes
+                sh "echo $name_nodes > file.txt" 
+                current_node = ${env.NAME_NODE} 
+                var = readfile(file.txt)
+            } 
         }
         echo "${var}" 
       }
