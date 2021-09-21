@@ -23,8 +23,15 @@ pipeline{
                 status = sh(returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1')
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
-    
-    vagrant destroy []  
+                                                    } 
+                 }
+                         }   
+        }
+    }
+
+
+
+   /*** vagrant destroy []  
 
             } 
         }   
@@ -67,8 +74,8 @@ if (status != 200 && status != 201) {
             } 
         }   
     } 
-
-
+/***/
+/***
         stage('testing')
          echo'testing current node running'
          steps {
@@ -80,7 +87,7 @@ if (status != 200 && status != 201) {
     node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
                              }
-} 
+} /***/
 /***catch (e) {
     echo 'Time out on optional step. Node down?'
     node ('${env.NODE_NAME}') { 
