@@ -5,15 +5,14 @@
     def backup2 = "http://72.16.254.253"
     def master2 = "http://72.16.254.254"
 pipeline{
-    agent any
+       agent any
     stages{
         stage('build'){
             steps{
                 echo 'building the app'
-                echo "$master1"
+                echo "${env.master1}"    
                 sh "python3 ./app.py"
-                
-                }
+                 }
             }
          
 
