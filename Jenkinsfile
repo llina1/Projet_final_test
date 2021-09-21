@@ -80,7 +80,8 @@ if (status != 200 && status != 201) {
     node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
     }
-} catch (e) {
+} 
+/***catch (e) {
     echo 'Time out on optional step. Node down?'
     node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
@@ -93,7 +94,7 @@ if (status != 200 && status != 201) {
     hostKeyCkecking: false
     //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
     )
-        }                 
+        }   /***/              
     }   
 }  
                 
