@@ -11,7 +11,7 @@ pipeline{
         stage('build'){
             steps{
                 echo 'building the app'  
-                echo 'masterP'
+                echo "$masterP"
                 sh "python3 ./app.py"
                  }
             }
