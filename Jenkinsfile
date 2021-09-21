@@ -13,7 +13,7 @@ pipeline{
                 sh "python3 ./app.py"
                 }
             }
-        } 
+         
 
         /***stage ('testing'){
             steps{
