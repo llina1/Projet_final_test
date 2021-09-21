@@ -4,7 +4,7 @@
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
     def master2 = "72.16.254.254"
-    
+    def masterP
 pipeline{
        agent any
     stages{
@@ -20,7 +20,8 @@ pipeline{
             steps{
                 echo 'testing node master before lauching'
                 node('master')
-                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin "http://"+"$backup1" '
+                masterP="http://"+"$backup1"
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $masterP'
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
     
