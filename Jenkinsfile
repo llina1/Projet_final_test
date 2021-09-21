@@ -43,7 +43,7 @@ if (status != 200 && status != 201) {
     colorized: true,
     playbook:" <nom du fichier .yml>",
     hostKeyChecking: false,
-    inventory: "<chemin du fichier dans git>"
+    //inventory: "<chemin du fichier dans git>"
     )
 }                   
 }
