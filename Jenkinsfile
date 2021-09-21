@@ -1,31 +1,30 @@
     def branchName=env.BRANCH_NAME 
     def status = 0
     def backup1 = "72.16.254.251"
-    def master1 = "http://72.16.254.252"
-    def backup2 = "http://72.16.254.253"
-    def master2 = "http://72.16.254.254"
+    def master1 = "72.16.254.252"
+    def backup2 = "72.16.254.253"
+    def master2 = "72.16.254.254"
     def masterP = "http://"+"$backup1"
 pipeline{
        agent any
     stages{
         stage('build'){
             steps{
-                echo 'building the app'  
-                echo masterP
+                echo 'building the app' 
                 sh "python3 ./app.py"
                  }
             }
          
 
-        /***stage ('testing'){
+        stage ('testing'){
             steps{
                 echo 'testing node master before lauching'
                 node('master')
-                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin "http://"+"$backup1" '
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
     
-    vagrant destroy []  
+    sh vagrant destroy [backup1]
 
             } 
         }   
