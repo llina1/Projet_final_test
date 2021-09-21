@@ -3,13 +3,13 @@
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
     def master2 = "72.16.254.254"
-    def masterP = "http://"+"$backup1"
+    def masterP = ${"http://"+"$backup1"} 
 pipeline{
        agent any
     stages{
         stage('build'){
             steps{
-                echo 'building the app'  
+                echo "building the app $masterP"  
                 //sh "python3 ./app.py"
                  }
             }
@@ -19,7 +19,7 @@ pipeline{
             steps{
                 script{ 
                 //echo 'testing node master before lauching'
-                int status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin "$masterP"'
+                int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin "$masterP"
                 if (status != 200 && status != 201){ 
     error("Returned status code = $status when calling $masterP")
                     } 
