@@ -1,6 +1,6 @@
     def branchName=env.BRANCH_NAME 
     def status = 0
-    def backup1 = "http://72.16.254.251"
+    def backup1 = "72.16.254.251"
     def master1 = "http://72.16.254.252"
     def backup2 = "http://72.16.254.253"
     def master2 = "http://72.16.254.254"
@@ -9,8 +9,9 @@ pipeline{
     stages{
         stage('build'){
             steps{
-                echo 'building the app'
-                echo "${env.master1}"    
+                echo 'building the app'  
+                def masterP = "http://"+"$backup1"
+                echo masterP
                 sh "python3 ./app.py"
                  }
             }
