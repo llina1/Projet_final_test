@@ -1,5 +1,5 @@
     def branchName=env.BRANCH_NAME 
-    def status = 0
+    def status = ''
     def backup1 = "72.16.254.251"
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
@@ -19,7 +19,7 @@ pipeline{
         stage('testing'){
             steps{
                 echo 'testing node master before lauching'
-                status = sh(returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1')
+                status = sh "returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'"
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
                                                     } 
