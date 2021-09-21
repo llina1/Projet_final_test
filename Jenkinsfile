@@ -18,9 +18,13 @@ pipeline{
 
         stage('testing'){
             steps{
-                echo 'testing node master before lauching',
+                echo 'testing node master before lauching'
                 script: status = sh "returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'"
+            }  
             }
+        stage('testing'){
+
+         
             steps{
                 (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
@@ -28,7 +32,7 @@ pipeline{
                                                      
                          }
                              }   
-                  
+                 
                          
     }
 }  
