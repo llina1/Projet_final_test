@@ -1,19 +1,19 @@
-    /**def branchName=env.BRANCH_NAME
+    def branchName=env.BRANCH_NAME
     def test_node = false
     def node_name = env.NODE_NAME 
 
     try {
     timeout(time: 5, unit: 'SECONDS') {
-        node('node_name') {
+        node('${env.NODE_NAME}') {
             echo 'Node is up. Performing optional step.'       
         }
     }
-    node('node_name') {
+    node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
     }
 } catch (e) {
     echo 'Time out on optional step. Node down?'
-    node ('node_name') { 
+    node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
    
     //sh "mkdir roles"
@@ -36,7 +36,9 @@
                 }
             }     
         }  
-    } /***/
+    }
+
+/*** 
 def var = ''
 def name_nodes = ''
 def current_node = ''
@@ -72,4 +74,4 @@ pipeline {
         }
      } 
     }
-}
+}/***/
