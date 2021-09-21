@@ -1,9 +1,47 @@
     def branchName=env.BRANCH_NAME
     def test_node = false
     def node_name = env.NODE_NAME 
+    def response = 0
+    def backup1 = "http://72.16.254.251"
+    def backup2 = "http://72.16.254.252"
+Pipeline{
+    stages{
+        stage('build')
+            steps{
+                echo 'building the app'
+            }
+        } 
 
-    try {
-    timeout(time: 5, unit: 'SECONDS') {
+        stage('testing running node'){ 
+            steps{ 
+                node('master'){
+                    response = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url'
+
+if (status != 200 && status != 201) {
+    error("Returned status code = $response when calling $url1")
+    node ('master') { 
+    git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+   sh "mkdir roles"
+   sh "ansible-galaxy install --roles -r requirements.yml"
+    ansiblePlaybook (
+    colorized: true,
+    playbook:" <nom du fichier .yml>",
+    hostKeyChecking: false
+    inventory: "<chemin du fichier dans git>"
+   
+}                )   
+}
+                } 
+            
+
+            } 
+        }   
+    } 
+
+
+        stage('testing curent node running')
+        try {
+        timeout(time: 5, unit: 'SECONDS') {
         node('${env.NODE_NAME}') {
             echo 'Node is up. Performing optional step.'       
         }
@@ -16,13 +54,13 @@
     node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
    
-    //sh "mkdir roles"
-    //sh "ansible-galaxy install --roles -r requirements.yml"
-    //ansiblePlaybook (
-    //colorized: true,
-    //playbook:" <nom du fichier .yml>",
-    //hostKeyCkecking: false
-    //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
+    sh "mkdir roles"
+    sh "ansible-galaxy install --roles -r requirements.yml"
+    ansiblePlaybook (
+    colorized: true,
+    playbook:" <nom du fichier .yml>",
+    hostKeyCkecking: false
+    inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
    
 }                //)   
 }
@@ -38,40 +76,9 @@
         }  
     }
 
-/*** 
-def var = ''
-def name_nodes = ''
-def current_node = ''
 pipeline {
-  agent any
-  stages {
-     stage('one') {
-      steps {
-            echo "env.NAME_NODE"
-            //name_nodes = sh(kubectl get nodes -lfoo=bar -otemplate --template='{{range .items}}{{.metadata.name}} {{end}}')
-            node { 
-                name_nodes = $nodes
-                sh "echo $name_nodes > file.txt" 
-                current_node = ${env.NAME_NODE} 
-                var = readfile(file.txt)
-            } 
-        }
-        echo "${var}" 
-      }
-    
-     stage('two') {
-      steps {
-        echo "${var}" // prints 'hotness'
-            }
-        }
-        // this stage is skipped due to the when expression, so nothing is printed
-     stage('three') {
-      when {
-        expression { var = ' ' }
-      }
-      steps {
-        echo "three: node down?"
-        }
-     } 
-    }
-}/***/
+    node('master'){
+
+    } 
+
+} 
