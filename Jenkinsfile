@@ -4,7 +4,7 @@
     def status = 0
     def backup1 = "http://72.16.254.251"
     def backup2 = "http://72.16.254.252"
-Pipeline{
+pipeline{
     stages{
         stage('build'){
             steps{
