@@ -14,15 +14,17 @@ pipeline{
             }
         } 
 
-        stage ('testing node master before lauching'){
+        stage ('testing'){
             steps{
+                echo 'testing node master before lauching'
                 node('master')
                 status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url3'
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
             } 
         }   
-        stage('Testing node master'){
+        stage('testing'){
+            echo 'Testing Jenkins in node master'
             steps{
                 status= sh jennkins --version
             } 
@@ -30,7 +32,8 @@ pipeline{
 
 
 
-        stage('testing running node'){ 
+        stage('testing'){ 
+            echo 'testing running node'
             steps{ 
                 node('master'){
                     status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url'
@@ -58,7 +61,7 @@ if (status != 200 && status != 201) {
 
 
         stage('testing curent node running')
-        try {
+         steps {
         timeout(time: 5, unit: 'SECONDS') {
         node('${env.NODE_NAME}') {
             echo 'Node is up. Performing optional step.'       
