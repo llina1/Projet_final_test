@@ -1,6 +1,6 @@
 import flask
 from flask import Flask
-from routes import configure_routes
+from handlers.routes import configure_routes
 
 app = Flask(__name__)
 
