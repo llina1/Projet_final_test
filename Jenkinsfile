@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('build'){
             steps{
-                script: masterP = $"{http://"+"$backup1}" 
+                sh masterP = $"{http://"+"$backup1}" 
                 echo "building the app $masterP"  
                 //sh "python3 ./app.py"
                  }
