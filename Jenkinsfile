@@ -10,8 +10,9 @@ pipeline{
         stage('build'){
             steps{
                 echo 'building the app'
+                echo "$master1"
                 sh "python3 ./app.py"
-                sh "$master1"
+                
                 }
             }
          
