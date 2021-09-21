@@ -3,7 +3,8 @@
     def master1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
     def master2 = "72.16.254.254"
-    def masterP = $"{http://"+"$backup1}"
+    def var = "http://"
+    def masterP = var + $backup1
     
 pipeline{
        agent any
