@@ -76,9 +76,9 @@ if (status != 200 && status != 201) {
     colorized: true,
     playbook:" <nom du fichier .yml>",
     hostKeyCkecking: false
-    inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
-   
-}                //)   
+    //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
+    )
+}                  
 }
     pipeline {
         agent any
