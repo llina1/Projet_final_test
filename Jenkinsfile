@@ -4,13 +4,13 @@
     def master1 = "http://72.16.254.252"
     def backup2 = "http://72.16.254.253"
     def master2 = "http://72.16.254.254"
+    def masterP = "http://"+"$backup1"
 pipeline{
        agent any
     stages{
         stage('build'){
             steps{
                 echo 'building the app'  
-                def masterP = "http://"+"$backup1"
                 echo masterP
                 sh "python3 ./app.py"
                  }
