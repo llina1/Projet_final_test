@@ -36,9 +36,9 @@ pipeline{
 
   
 
-            } 
-        }   
-        stage('testing'){
+            
+           
+       /*** stage('testing'){
             echo 'Testing Jenkins in node master'
             steps{
                 node('master'){
@@ -90,8 +90,8 @@ if (status != 200 && status != 201) {
     node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
                              }
-} /***/
-/***catch (e) {
+} 
+catch (e) {
     echo 'Time out on optional step. Node down?'
     node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
