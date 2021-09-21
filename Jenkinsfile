@@ -11,17 +11,16 @@ pipeline{
         stage('build'){
             steps{
                 echo 'building the app'  
-                echo "$masterP"
                 sh "python3 ./app.py"
                  }
             }
          
 
-        /***stage ('testing'){
+        stage ('testing'){
             steps{
                 echo 'testing node master before lauching'
                 node('master')
-                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $backup1'
+                status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $masterP'
                 if (status != 200 && status != 201) {
     error("Returned status code = $response when calling $url1")
     
@@ -81,7 +80,7 @@ if (status != 200 && status != 201) {
     node('${env.NODE_NAME}') {
         echo 'This is an optional step.'
     }
-} catch (e) {
+} /***catch (e) {
     echo 'Time out on optional step. Node down?'
     node ('${env.NODE_NAME}') { 
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
