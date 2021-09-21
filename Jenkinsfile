@@ -24,7 +24,7 @@ pipeline{
                 int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $masterP"
                 if (status != 200 && status != 201){ 
     error("Returned status code = $status when calling $masterP")
-    sh "vagrant destroy $backup1"
+    //sh "vagrant destroy $backup1"
                     } 
                 } 
             }
