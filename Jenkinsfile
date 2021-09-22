@@ -1,17 +1,18 @@
-    def branchName=env.BRANCH_NAME 
     def backup1 = "72.16.254.251"
-    def master1 = "72.16.254.252"
+    def virtM1 = "72.16.254.252"
     def backup2 = "72.16.254.253"
-    def master2 = "72.16.254.254"
+    def virtM2 = "72.16.254.254"
     def url0 = "http://"
     def url1 = var + backup1
+    def url2 = var + virtM1
+    def url3 = var + backup2
+    def url4 = var + virtM2
     
 pipeline{
        agent any
     stages{
         stage('build'){
-            steps{
-                //masterP = sh $"{http://"+"$backup1}" 
+            steps{ 
                 echo "building the app"  
                 //sh "python3 ./app.py"
                  }
@@ -25,8 +26,17 @@ pipeline{
                 int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
                 echo "$status"
                 if (status != 200 && status != 201){ 
-    error("Returned status code = $status when calling $url1")
-    script: sh "vagrant destroy $backup1"
+    error("Returned status code = $status when calling $url1"),
+    sh "vagrant destroy $backup1",
+    git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+    sh "mkdir roles"
+    sh "ansible-galaxy install --roles -r requirements.yml"
+    ansiblePlaybook (
+    colorized: true,
+    playbook:" <nom du fichier .yml>",
+    hostKeyChecking: false,
+    //inventory: "<chemin du fichier dans git>"
+    )
                     } 
                 } 
             }
