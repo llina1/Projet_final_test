@@ -45,15 +45,15 @@ pipeline{
                 int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
                 echo "$status"
                 if (status != 200 && status != 201){ 
-    error("Returned status code = $status when calling $url1"),
-    sh "vagrant destroy $backup1",
+    error("Returned status code = $status when calling $url1")
+    sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "mkdir roles"
     sh "ansible-galaxy install --roles -r requirements.yml"
     ansiblePlaybook (
     colorized: true,
     playbook:" <nom du fichier .yml>",
-    hostKeyChecking: false,
+    hostKeyChecking: false
     //inventory: "<chemin du fichier dans git>"
     )
                     } 
