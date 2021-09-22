@@ -8,6 +8,7 @@
     def url3 = url0+ backup2
     def url4 = url0 + virtM2
     def status = 0
+    def jenkinsPath = ''
     
 pipeline{
        agent any
