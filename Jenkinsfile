@@ -33,7 +33,8 @@ pipeline{
             } 
         } 
 
-        stage('Check'){   
+        stage('Check'){
+
             when { status != 200 && status != 201 } 
     //error("Returned status code = $status when calling $url1")
     steps{
@@ -48,12 +49,12 @@ pipeline{
     playbook:" <nom du fichier .yml>",
     hostKeyChecking: false,
     inventory: "<chemin du fichier dans git>"
-    )
-    } 
-        }         
-            } 
-    }
- }  
+    )        
+            }
+        } 
+    }  
+    
+   
             
         /***/                                            
                          
