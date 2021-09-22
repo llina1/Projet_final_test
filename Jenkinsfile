@@ -21,7 +21,7 @@ pipeline{
             }
         
 
-        stage('Check'){
+        /***stage('Check'){
             steps{
                 script{ 
                 //echo 'testing node master before lauching'
@@ -43,7 +43,7 @@ pipeline{
                     } 
                 } 
             }
-        }                                             
+        }/***/                                            
                          
                                
                  
