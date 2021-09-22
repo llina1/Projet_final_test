@@ -150,7 +150,6 @@ pipeline{
         stage('testing'){ 
             steps {
                 echo'testing if all nodes are up'
-                nodeName = sh(kubectl -a get nodes)
                 script {
                     sh(JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}')
                     nodesReady = sh(ubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True")
