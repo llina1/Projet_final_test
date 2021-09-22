@@ -114,8 +114,7 @@ pipeline{
         }
 
         stage('Test4'){
-                steps{
-                     
+                steps{     
                     script{
                         sh(echo "$jenkinsPath" > file.txt)
                         jenkinsVar = sh"grep "jenkins$""
@@ -123,6 +122,18 @@ pipeline{
                             echo 'jenkins is installed'
                         } else {
                             echo 'jenkins is not installed'
+                            script {
+                                git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+                                sh "rmdir -r roles"
+                                sh "mkdir roles"
+                                sh "ansible-galaxy install --roles -r requirements.yml"
+                                ansiblePlaybook (
+                                colorized: true,
+                                playbook:" <nom du fichier .yml>",
+                                hostKeyChecking: false,
+                                inventory: "<chemin du fichier dans git>"
+                            } 
+
                         } 
                     }  
                 } 
