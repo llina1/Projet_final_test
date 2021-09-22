@@ -27,10 +27,11 @@ pipeline{
                 //echo 'testing node master before starting'
                 //int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
-                def response = sh(script: 'curl $url1', returnStdout: true)
+                //def response = sh(script: 'curl $url1', returnStdout: true)
+                def response = sh(script:"curl -X POST -i -u admin:admin $url1", returnStdout: true)
                 sh "echo $response"
                 //if ($status != 200 && $status != 201){ 
-                if ($status == 28){ 
+                if ($response == 28){ 
     //error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
