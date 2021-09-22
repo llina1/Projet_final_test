@@ -117,7 +117,7 @@ pipeline{
                 steps{
                     sh "echo $jenkinsPath > file.txt" 
                     script{
-                        jenkinsVar = sh(grep "jenkins$")
+                        jenkinsVar = sh"grep "jenkins$""
                         if (jenkinsVar != '') {
                             sh "echo jenkins is not installed"
                         } 
