@@ -121,11 +121,11 @@ pipeline{
                         if (jenkinsVar != '') {
                             sh "echo jenkins is not installed"
                         } 
-
                     }  
                 } 
-            } 
+                
         } 
+         
 
     } 
             
