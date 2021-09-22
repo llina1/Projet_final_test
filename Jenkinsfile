@@ -106,7 +106,7 @@ pipeline{
            
         stage('Test3'){
             //node { 
-                echo 'Testing Jenkins in node master'
+                echo 'Testing Jenkins in Master node '
                 steps{
                     jenkinsPath = sh"whereis jenkins"
                 } 
@@ -119,7 +119,9 @@ pipeline{
                     script{
                         jenkinsVar = sh"grep "jenkins$""
                         if (jenkinsVar != '') {
-                            sh "echo jenkins is not installed"
+                            echo 'jenkins is installed'
+                        } else {
+                            echo 'jenkins is not installed'
                         } 
                     }  
                 } 
