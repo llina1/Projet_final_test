@@ -19,7 +19,17 @@ pipeline{
                 //sh "python3 ./app.py"
                  }
             }
-        
+        stage("Using curl example") {
+            steps {
+                script {
+                    final String url = "url1"
+
+                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+
+                    echo response
+                }
+            }
+        }
 
         /***stage('Check'){
             steps{
