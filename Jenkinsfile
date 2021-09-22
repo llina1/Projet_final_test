@@ -123,7 +123,7 @@ pipeline{
                         } 
                     }  
                 } 
-                
+
         } 
          
 
@@ -135,8 +135,7 @@ pipeline{
 
     
 
-}                   
-}
+
 /***
         stage('testing')
          echo'testing current node running'
