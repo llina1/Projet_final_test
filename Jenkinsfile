@@ -9,6 +9,7 @@
     def url4 = url0 + virtM2
     def status = 0
     def jenkinsPath = ''
+    def nodeName = ''
     
 pipeline{
        agent any
@@ -102,8 +103,7 @@ pipeline{
             }
         }
      
-  
-    /***/        
+   
            
         stage('Test3'){
             //node { 
@@ -143,21 +143,21 @@ pipeline{
         } 
          
 
-    } 
+    
             
-} 
+
 
 
 
     
 
 
-/***
+/***/
         stage('testing')
          echo'testing current node running'
          steps {
         timeout(time: 5, unit: 'SECONDS') {
-        node('${env.NODE_NAME}') {
+        node('nodeName') {
             echo 'Node is up. Performing optional step.'       
                                  }
                                           }
@@ -166,7 +166,7 @@ pipeline{
                              }
 } 
            
-    }  /***/ 
+    }  
     
 
                 
