@@ -10,6 +10,7 @@
     def status = 0
     def jenkinsPath = ''
     def nodeName = ''
+    def nodesReady = ''
     
 pipeline{
        agent any
@@ -117,8 +118,8 @@ pipeline{
         stage('Test4'){
                 steps{     
                     script{
-                        sh"echo $jenkinsPath > file.txt)"
-                        jenkinsVar = sh"grep "jenkins$""
+                        sh"echo $jenkinsPath > file1.txt)"
+                        jenkinsVar = sh"grep "jenkins$" file1.txt"
                         if (jenkinsVar != '') {
                             echo 'jenkins is installed'
                         } else {
@@ -144,30 +145,24 @@ pipeline{
          
 
     
-            
-
-
-
-
-    
-
 
 /***/
-        stage('testing')
-         echo'testing current node running'
-         steps {
-        timeout(time: 5, unit: 'SECONDS') {
-        node('nodeName') {
-            echo 'Node is up. Performing optional step.'       
-                                 }
-                                          }
-    node('${env.NODE_NAME}') {
-        echo 'This is an optional step.'
-                             }
-} 
-           
-    }  
-    
+        stage('testing'){ 
+            steps {
+                echo'testing if all nodes are up'
+                nodeName = sh(kubectl -a get nodes)
+                script {
+                    sh(JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}')
+                    nodesReady = sh(ubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True")
+                      sh"echo $nodesReady > file2.txt)"
+                      nodesReadyVar = sh"grep "jenkins$" file1.txt"
+
+                } 
+            }          
+
+        }         
+    }
+}
 
                 
             
