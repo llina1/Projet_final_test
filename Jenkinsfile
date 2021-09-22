@@ -33,10 +33,11 @@ pipeline{
             } 
         } 
 
-        stage('Test1'){   
-            if (status != 200 && status != 201){ 
+        stage('Check'){   
+            when { status != 200 && status != 201 } 
     //error("Returned status code = $status when calling $url1")
-    scrit:{
+    steps{
+        script{ 
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "rmdir -r roles"
@@ -51,6 +52,8 @@ pipeline{
     } 
         }         
             } 
+    }
+ }  
             
         /***/                                            
                          
