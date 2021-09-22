@@ -29,8 +29,8 @@ pipeline{
                 //def response = sh(script: 'curl $url1', returnStdout: true)
                 def status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)
                 sh "echo $status"
-                if ($status != 200 && $status != 201){ 
-    //error("Returned status code = $status when calling $url1")
+                if (status != 200 && status != 201){ 
+    error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "rmdir -r roles"
