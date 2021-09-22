@@ -30,7 +30,7 @@ pipeline{
                 def response = sh(script: 'curl https://some-host/some-service/getApi?apikey=someKey', returnStdout: true)
                 sh "echo $response"
                 //if ($status != 200 && $status != 201){ 
-                if ($status = 28){ 
+                if ($status == 28){ 
     //error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
