@@ -17,18 +17,17 @@ pipeline{
 
     stages{
  
-        stage('build'){
+/***        stage('build'){
             steps{ 
                 echo "building the app"  
                 //sh "python3 ./app.py"
-                 }
+                }
             }
 
-
-        stage('Test'){
+        stage('Test1'){
             steps{
                 script{ 
-                echo 'testing node backup1 before starting'
+                echo 'testing backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
                 //def response = sh(script: 'curl $url1', returnStdout: true)
                 status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
@@ -36,53 +35,100 @@ pipeline{
             } 
         } 
 
-        stage('Test1'){      
-    steps{
-        sh "echo $status"
-         script{
-            if (status != 200 && status != 201) {  
-    //error("Returned status code = $status when calling $url1") 
-    sh "vagrant destroy $backup1"
-    git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-    sh "rmdir -r roles"
-    sh "mkdir roles"
-    sh "ansible-galaxy install --roles -r requirements.yml"
-    ansiblePlaybook (
-    colorized: true,
-    playbook:" <nom du fichier .yml>",
-    hostKeyChecking: false,
-    inventory: "<chemin du fichier dans git>"
-    )        
+        stage('Test3'){      
+            steps{
+                sh "echo $status"
+                    script{
+                        if (status != 200 && status != 201) {  
+                        //error("Returned status code = $status when calling $url1") 
+                        sh "vagrant init"
+                        sh "vagrant destroy $backup1"
+                        sh "vagrant reload $backup1"
+                    }
+                }
+            }
+        }             
+        stage('Import'){ 
+            steps{ 
+                git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+                sh "rmdir -r roles"
+                sh "mkdir roles"
+                sh "ansible-galaxy install --roles -r requirements.yml"
+                ansiblePlaybook (
+                colorized: true,
+                playbook:" <nom du fichier .yml>",
+                hostKeyChecking: false,
+                inventory: "<chemin du fichier dans git>"
+                )        
             }
         } 
-     }
-    }   
-    
-   
-            
-        /***/                                            
-                         
-                               
-                 
-                         
-    }
-}  
-
-  
-
-            
-           
-       /*** stage('Test3'){
-            node { 
-            echo 'Testing Jenkins in node master'
+         stage('Test3'){
             steps{
-                node('master'){
-                status= sh jennkins --version
+                script{ 
+                echo 'testing backup1 before starting'
+                //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
+                //def response = sh(script: 'curl $url1', returnStdout: true)
+                status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)  
+                }
             } 
-
-            } 
-            
         } 
+
+        stage('Test4'){      
+            steps{
+                sh "echo $status"
+                    script{
+                        if (status != 200 && status != 201) {  
+                        //error("Returned status code = $status when calling $url1") 
+                        sh "vagrant init"
+                        sh "vagrant destroy $backup2"
+                        sh "vagrant reload $backup2"
+                    }
+                }
+            }
+        }             
+        stage('Import'){ 
+            steps{ 
+                git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+                sh "rmdir -r roles"
+                sh "mkdir roles"
+                sh "ansible-galaxy install --roles -r requirements.yml"
+                ansiblePlaybook (
+                colorized: true,
+                playbook:" <nom du fichier .yml>",
+                hostKeyChecking: false,
+                inventory: "<chemin du fichier dans git>"
+                )        
+            }
+        }
+     
+  
+/***/        
+           
+        stage('Test3'){
+            node { 
+                echo 'Testing Jenkins in node master'
+                steps{
+                    jenkinsPath = sh(whereis jenkins)
+                } 
+            } 
+        }
+
+        stage('Test4'){
+                steps{
+                    sh "echo $jenkinsPath > file.txt" 
+                    script{
+                        jenkinsVar = sh(grep "jenkins$")
+                        if (jenkinsVar != '') {
+                            sh "echo jenkins is not installed"
+                        } 
+
+                    }  
+                } 
+        } 
+
+    } 
+            
+} 
 
 
 
