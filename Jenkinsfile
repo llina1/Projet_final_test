@@ -102,15 +102,15 @@ pipeline{
         }
      
   
-/***/        
+    /***/        
            
         stage('Test3'){
-            node { 
+            //node { 
                 echo 'Testing Jenkins in node master'
                 steps{
                     jenkinsPath = sh"whereis jenkins"
                 } 
-            } 
+            //} 
         }
 
         stage('Test4'){
@@ -124,6 +124,7 @@ pipeline{
 
                     }  
                 } 
+            } 
         } 
 
     } 
@@ -132,33 +133,10 @@ pipeline{
 
 
 
-        stage('testing'){ 
-            echo 'testing running node'
-            steps{ 
-                node('master'){
-                    status = sh returnStdout: true, script: 'curl -X POST -i -u admin:admin $url'
+    
 
-if (status != 200 && status != 201) {
-    error("Returned status code = $status when calling $url1")
-    node ('master') { 
-    git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-   sh "mkdir roles"
-   sh "ansible-galaxy install --roles -r requirements.yml"
-    ansiblePlaybook (
-    colorized: true,
-    playbook:" <nom du fichier .yml>",
-    hostKeyChecking: false,
-    //inventory: "<chemin du fichier dans git>"
-    )
 }                   
 }
-                } 
-            
-
-            } 
-        }   
-    } 
-/***/
 /***
         stage('testing')
          echo'testing current node running'
@@ -172,20 +150,7 @@ if (status != 200 && status != 201) {
         echo 'This is an optional step.'
                              }
 } 
-catch (e) {
-    echo 'Time out on optional step. Node down?'
-    node ('${env.NODE_NAME}') { 
-    git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-   
-    sh "mkdir roles"
-    sh "ansible-galaxy install --roles -r requirements.yml"
-    ansiblePlaybook (
-    colorized: true,
-    playbook:" <nom du fichier .yml>",
-    hostKeyCkecking: false
-    //inventory: "<chemin du fichier dans git ex:"env/${branchName}/hosts)>",
-    )
-        }                  
+           
     }  /***/ 
     
 
