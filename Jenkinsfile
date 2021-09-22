@@ -35,7 +35,7 @@ pipeline{
 
         stage('Check'){
 
-            when { status != 200 && status != 201 } 
+            when { expression { status != 200 && status != 201 } } 
     //error("Returned status code = $status when calling $url1")
     steps{
         script{ 
