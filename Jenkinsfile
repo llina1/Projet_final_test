@@ -116,7 +116,7 @@ pipeline{
         stage('Test4'){
                 steps{     
                     script{
-                        sh(echo "$jenkinsPath" > file.txt)
+                        sh"echo $jenkinsPath > file.txt)"
                         jenkinsVar = sh"grep "jenkins$""
                         if (jenkinsVar != '') {
                             echo 'jenkins is installed'
