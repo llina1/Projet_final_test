@@ -21,11 +21,10 @@ pipeline{
             }
 
 
-        stage('Check'){
+        stage('Test'){
             steps{
                 script{ 
-                //echo 'testing node master before starting'
-                //int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
+                echo 'testing node backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
                 //def response = sh(script: 'curl $url1', returnStdout: true)
                 def response = sh(script:"curl -X POST -i -u admin:admin $url1", returnStdout: true)
@@ -35,13 +34,14 @@ pipeline{
     //error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
+    sh "rmdir -r roles"
     sh "mkdir roles"
     sh "ansible-galaxy install --roles -r requirements.yml"
     ansiblePlaybook (
     colorized: true,
     playbook:" <nom du fichier .yml>",
-    hostKeyChecking: false
-    //inventory: "<chemin du fichier dans git>"
+    hostKeyChecking: false,
+    inventory: "<chemin du fichier dans git>"
     )
                     } 
                 } 
