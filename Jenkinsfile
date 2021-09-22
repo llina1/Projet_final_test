@@ -40,7 +40,7 @@ pipeline{
     steps{
         sh "echo $status"
          script{
-            when { expression { status != 200 && status != 201 } } 
+            if (status != 200 && status != 201) {  
     //error("Returned status code = $status when calling $url1") 
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
@@ -55,7 +55,8 @@ pipeline{
     )        
             }
         } 
-    }  
+     }
+    }   
     
    
             
@@ -71,7 +72,8 @@ pipeline{
 
             
            
-       /*** stage('testing'){
+       /*** stage('Test3'){
+            node { 
             echo 'Testing Jenkins in node master'
             steps{
                 node('master'){
