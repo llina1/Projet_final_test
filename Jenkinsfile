@@ -33,7 +33,7 @@ pipeline{
             } 
         } 
 
-        stage('Test'){   
+        stage('Test1'){   
             if (status != 200 && status != 201){ 
     //error("Returned status code = $status when calling $url1")
     scrit:{
