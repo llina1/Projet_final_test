@@ -3,10 +3,10 @@
     def backup2 = "72.16.254.253"
     def virtM2 = "72.16.254.254"
     def url0 = "http://"
-    def url1 = var + backup1
-    def url2 = var + virtM1
-    def url3 = var + backup2
-    def url4 = var + virtM2
+    def url1 = url0 + backup1
+    def url2 = url0 + virtM1
+    def url3 = url0+ backup2
+    def url4 = url0 + virtM2
     
 pipeline{
        agent any
