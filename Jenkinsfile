@@ -24,10 +24,11 @@ pipeline{
         stage('Check'){
             steps{
                 script{ 
-                //echo 'testing node master before lauching'
+                //echo 'testing node master before starting'
                 //int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
-                int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
-                echo "$status"
+                //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
+                def response = sh(script: 'curl https://some-host/some-service/getApi?apikey=someKey', returnStdout: true)
+                sh "echo $response"
                 //if ($status != 200 && $status != 201){ 
                 if ($status = 28){ 
     //error("Returned status code = $status when calling $url1")
