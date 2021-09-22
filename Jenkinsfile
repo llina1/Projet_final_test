@@ -108,7 +108,7 @@ pipeline{
             node { 
                 echo 'Testing Jenkins in node master'
                 steps{
-                    jenkinsPath = sh(whereis jenkins)
+                    jenkinsPath = sh"whereis jenkins"
                 } 
             } 
         }
