@@ -19,27 +19,18 @@ pipeline{
                 //sh "python3 ./app.py"
                  }
             }
-        stage("Using curl example") {
-            steps {
-                script {
-                    final String url = url1
 
-                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
 
-                    echo "response"
-                }
-            }
-        }
-
-        /***stage('Check'){
+        stage('Check'){
             steps{
                 script{ 
                 //echo 'testing node master before lauching'
-                int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
-                //int status = sh returnStfout: true, script: "curl -s -o /dev/null -w "%{http_code}" $url1"
-                echo "$status"
-                if ($status != 200 && $status != 201){ 
-    error("Returned status code = $status when calling $url1")
+                //int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
+                int status = sh(script: "curl -s -o /dev/null -w "%{http_code}" $url1")
+                echo status
+                //if ($status != 200 && $status != 201){ 
+                if ($status = 28){ 
+    //error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "mkdir roles"
