@@ -106,8 +106,8 @@ pipeline{
            
         stage('Test3'){
             //node { 
-                echo 'Testing Jenkins in Master node '
                 steps{
+                    echo 'Testing Jenkins in Master node '
                     jenkinsPath = sh"whereis jenkins"
                 } 
             //} 
