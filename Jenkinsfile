@@ -7,12 +7,13 @@
     def url2 = url0 + virtM1
     def url3 = url0+ backup2
     def url4 = url0 + virtM2
+    def status = 0
     
 pipeline{
        agent any
-       options {
-           timeout(time: 1, unit: 'SECONDS')
-       } 
+       //options {
+           //timeout(time: 1, unit: 'SECONDS')
+       //} 
 
     stages{
  
@@ -30,15 +31,16 @@ pipeline{
                 echo 'testing node backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
                 //def response = sh(script: 'curl $url1', returnStdout: true)
-                def status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)
-                sh "echo $status"
+                status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)
+                
                 }
             } 
         } 
 
         stage('Check'){
 
-            when { expression { $status != 200 && $status != 201 } } 
+            sh "echo $status"
+            when { expression { status != 200 && status != 201 } } 
     //error("Returned status code = $status when calling $url1")
     steps{
         script{ 
