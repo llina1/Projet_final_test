@@ -31,8 +31,7 @@ pipeline{
                 echo 'testing node backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
                 //def response = sh(script: 'curl $url1', returnStdout: true)
-                status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)
-                
+                status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                 }
             } 
         } 
@@ -40,9 +39,9 @@ pipeline{
         stage('Test1'){      
     steps{
         sh "echo $status"
+         script{
             when { expression { status != 200 && status != 201 } } 
-    //error("Returned status code = $status when calling $url1")
-        script{ 
+    //error("Returned status code = $status when calling $url1") 
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
     sh "rmdir -r roles"
