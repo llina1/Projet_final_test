@@ -25,9 +25,10 @@ pipeline{
             steps{
                 script{ 
                 //echo 'testing node master before lauching'
-                int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
+                //int status = sh returnStdout: true, script: "curl -X POST -i -u admin:admin $url1"
+                int status = sh curl -s -o /dev/null -w "%{http_code}" $url1
                 echo "$status"
-                if (status != 200 && status != 201){ 
+                if ($status != 200 && $status != 201){ 
     error("Returned status code = $status when calling $url1")
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
