@@ -10,6 +10,9 @@
     
 pipeline{
        agent any
+       options {
+           timeout(time: 1, unit: 'SECONDS')
+       } 
 
     stages{
  
@@ -35,7 +38,7 @@ pipeline{
 
         stage('Check'){
 
-            when { expression { status != 200 && status != 201 } } 
+            when { expression { $status != 200 && $status != 201 } } 
     //error("Returned status code = $status when calling $url1")
     steps{
         script{ 
