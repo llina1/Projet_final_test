@@ -37,12 +37,11 @@ pipeline{
             } 
         } 
 
-        stage('Check'){
-
-            sh "echo $status"
+        stage('Test1'){      
+    steps{
+        sh "echo $status"
             when { expression { status != 200 && status != 201 } } 
     //error("Returned status code = $status when calling $url1")
-    steps{
         script{ 
     sh "vagrant destroy $backup1"
     git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
