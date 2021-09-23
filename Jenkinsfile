@@ -29,8 +29,9 @@ pipeline{
                 //sh "python3 ./app.py"
                 }
             }
+      node('MasterNode'){
         stage('Test1'){
-          node('MasterNode'){
+          
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
@@ -40,9 +41,9 @@ pipeline{
                 //} 
             } 
           }
-        } 
-        stage('Test2'){ 
-          node('MasterNode'){      
+         
+      //node('MasterNode'){
+        stage('Test2'){  
             steps{
                 sh "echo $status"
                     script{
@@ -57,21 +58,21 @@ pipeline{
 
                 }
             } 
-        }             
+        //}             
         
         stage('Test3'){
-          node('MasterNode'){
+          //node('MasterNode'){
             steps{
                 script{ 
                     echo 'testing backup2 before starting'
                     status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)
                 }
             } 
-          } 
+          //} 
         } 
 
         stage('Test4'){ 
-          node('MasterNode'){     
+          //node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
@@ -86,9 +87,9 @@ pipeline{
             }
           } 
         }             
-        
+      node('BackupNode'){ 
         stage('Test5'){
-            node('BackupNode'){ 
+            
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
@@ -97,9 +98,9 @@ pipeline{
                     }    
                 } 
             } 
-        }     
+      node('BackupNode'){    
         stage('Test6'){ 
-          node('BackupNode')     
+               
             steps{
                 sh "echo $status"
                     script{
@@ -112,9 +113,10 @@ pipeline{
                         } 
                     }
                 }
-        }             
+            } 
+        }  
+      node('MasterNode'){           
          stage('Test7'){
-            node('MasterNode'){ 
                 steps{
                     script{
                         //status = 200
@@ -125,9 +127,8 @@ pipeline{
                     } 
                 } 
             } 
-        }                        
-         stage('Test8'){ 
-          node('MasterNode'){     
+                                
+         stage('Test8'){      
             steps{
                 sh "echo $status"
                     script{
