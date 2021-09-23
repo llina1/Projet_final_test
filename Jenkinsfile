@@ -22,30 +22,24 @@ pipeline{
        //} 
 
     stages{
- 
+/*** 
         stage('build'){
             steps{ 
                 echo "building the app"  
                 //sh "python3 ./app.py"
                 }
             }
-
         stage('Test1'){
             //status = 200
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
-                        
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
-
                 //} 
-
-                
             } 
         } 
-
         stage('Test2'){ 
           //node('master'){      
             steps{
@@ -55,8 +49,9 @@ pipeline{
                             //sh "vagrant init"
                             //sh "vagrant destroy $backup1"
                             //sh "vagrant reload"
-                            echo 'test1 completed'
-                        }
+                        } else {
+                            echo 'backup1 is up'
+                        } 
                     }
             }
         }             
@@ -67,7 +62,6 @@ pipeline{
                 script{ 
                     echo 'testing backup2 before starting'
                     status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)
-
                 }
             } 
         } 
@@ -80,7 +74,9 @@ pipeline{
                             //sh "vagrant init"
                             //sh "vagrant destroy $backup2"
                             //sh "vagrant reload $backup2"
-                        }
+                        } else {
+                            echo 'backup2 is up'
+                        } 
                 }
             }
         }             
@@ -90,7 +86,7 @@ pipeline{
                 //status = 200
                 steps{
                     script{
-                         echo 'Testing if Master node IP before starting'
+                         echo 'Testing Master node IP before starting'
                          status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true) 
 
                     }    
@@ -106,7 +102,9 @@ pipeline{
                             //sh "vagrant init"
                             //sh "vagrant destroy $virtM2"
                             //sh "vagrant reload $virtM2"       
-                        }
+                        } else {
+                            echo 'backup1 is up'
+                        } 
                     }
                 }
         }             
@@ -136,20 +134,19 @@ pipeline{
                 }
             } 
         }               
-
-       /*** stage('testing'){ 
+/***/
+        stage('Test9'){ 
             steps {
                 echo'testing if all nodes are up'
                 script {
                     sh(JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}')
                     nodesReady = sh(script: kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True")
                       sh"echo $nodesReady > file2.txt)"
-                      nodesReadyVar = sh"grep "jenkins$" file1.txt"
+                      sh"cat file.txt"
 
                 } 
             }          
-
-        } /***/        
+        }        
     }
 }
 
