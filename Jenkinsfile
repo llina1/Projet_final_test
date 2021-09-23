@@ -31,8 +31,8 @@ pipeline{
             }
 
         stage('Test1'){
+            status = 200
             steps{
-                status = 200
                 script{ 
                 echo 'testing backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
