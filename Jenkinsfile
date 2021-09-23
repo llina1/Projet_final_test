@@ -35,6 +35,7 @@ pipeline{
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
+                        
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
@@ -76,9 +77,9 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            sh "vagrant init"
-                            sh "vagrant destroy $backup2"
-                            sh "vagrant reload $backup2"
+                            //sh "vagrant init"
+                            //sh "vagrant destroy $backup2"
+                            //sh "vagrant reload $backup2"
                         }
                 }
             }
@@ -102,9 +103,9 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            sh "vagrant init"
-                            sh "vagrant destroy $virtM2"
-                            sh "vagrant reload $virtM2"       
+                            //sh "vagrant init"
+                            //sh "vagrant destroy $virtM2"
+                            //sh "vagrant reload $virtM2"       
                         }
                     }
                 }
