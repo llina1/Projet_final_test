@@ -31,7 +31,6 @@ pipeline{
             }
 
         stage('Test1'){
-         //node ('master'){ 
             steps{
                 status = 200
                 script{ 
@@ -105,10 +104,10 @@ pipeline{
         
         stage('Test5'){
             //node('master backup){ 
+                status = 200
                 steps{
                     echo 'Testing if Master node IP before starting'
                     //jenkinsPath = sh"whereis jenkins"
-                    status = 200
                     status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true) 
                 } 
             //} 
@@ -140,9 +139,10 @@ pipeline{
          stage('Test7'){
             //node('master'){ 
                 steps{
+                     status = 200
                     echo 'Testing Jenkins in Master node'
                     //jenkinsPath = sh"whereis jenkins"
-                    status = 200
+                   
                     status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true) 
                 } 
             //} 
