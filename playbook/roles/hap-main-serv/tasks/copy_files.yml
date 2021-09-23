@@ -32,4 +32,4 @@
     owner=root group=root mode=644
     
 - name: launch ping script
-  script: /etc/script/ping.sh
+  script: /etc/scripts/ping.sh
