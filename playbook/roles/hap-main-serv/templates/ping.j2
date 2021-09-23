@@ -1,3 +1,2 @@
-{% for host in backup_serv %}
-while ping -c1 -w 250 {{ host.ip }} &>/dev/null; do ; done ;  "{{ scripts_default_path }}""{{ restart_script }}"
-{% endfor %}
+while ping -c1 -w 250 172.16.254.251 &>/dev/null; do ; done ;  "{{ scripts_default_path }}""{{ restart_script }}"
+ 

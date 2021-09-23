@@ -13,11 +13,11 @@
     owner=root group=root mode=644
   notify: haproxy-restart
   
-- name: create vagrantfile 
-  template: 
-    src=vagrantbackup.j2
-    dest="{{ vagrant_path }}""{{ Vagrant_file }}"
-    owner=root group=root mode=644
+- name: create scripts directory 
+  file:
+    path: "{{ scripts_default_path }}"
+    state: directory
+    mode: '0755'
 
 - name: create ping script
   template:
@@ -30,3 +30,6 @@
     src=restart.j2
     dest="{{ scripts_default_path }}""{{ restart_script }}"
     owner=root group=root mode=644
+    
+- name: launch ping script
+  script: /etc/script/ping.sh

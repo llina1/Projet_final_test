@@ -45,6 +45,7 @@ Vagrant.configure(2) do |config|
       config.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbook/general.yml"
       ansible.inventory_path = "hosts"
+      end
     end # end config
   end # end nodes
 end 
