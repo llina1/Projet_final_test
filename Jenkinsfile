@@ -140,10 +140,10 @@ pipeline{
                 echo'testing if all nodes are up'
                 script {
                     sh(JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}')
-                    nodesReady = sh "kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True""
+                    nodesReady = sh "kubectl get nodes -o jsonpath="$JSONPATH""
                     sh"echo $nodesReady > file2.txt)"
-                    sh"cat file.txt"
-
+                    sh "grep "Ready=True" file2.txt"
+                    sh"cat file2.txt"
                 } 
             }          
         }        
