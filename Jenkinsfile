@@ -16,7 +16,7 @@
     def urlJenkins2 = url0 + virtM2 + urlJenkins0
     
 pipeline{
-       agent none
+       agent {label 'MasterNode||BackupNode'} 
        //options {
            //timeout(time: 1, unit: 'SECONDS')
        //} 
