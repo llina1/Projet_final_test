@@ -16,13 +16,12 @@
     def urlJenkins2 = url0 + virtM2 + urlJenkins0
     
 pipeline{
-       agent node
+       agent none
        //options {
            //timeout(time: 1, unit: 'SECONDS')
        //} 
 
     stages{
-        
         stage('build'){
             steps{ 
                 echo "building the app"  
@@ -30,7 +29,7 @@ pipeline{
                 }
             }
         stage('Test1'){
-          node('MasterNode'){
+          agent {label'MasterNode'}
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
@@ -39,8 +38,9 @@ pipeline{
                     }
                 //} 
             } 
-          }
+          
         } 
+/***
         stage('Test2'){ 
           node('MasterNode'){      
             steps{
@@ -152,6 +152,6 @@ pipeline{
                     sh"cat file2.txt"
                 } 
             }          
-        }       
+        } /***/       
     }
 }   
