@@ -1,0 +1,30 @@
+---
+
+- hosts: HapMain
+  user: vagrant
+  sudo: yes
+  
+  roles:
+    - hap-main-serv
+    
+- hosts: HapFail
+  user: vagrant
+  sudo: yes
+  
+  roles:
+    - hap-fail-serv
+    
+- hosts: Master
+  user: vagrant
+  sudo: yes
+  
+  roles: 
+    - master-nodes
+    
+- hosts: Workers
+  user: vagrant
+  sudo: yes
+  
+  roles:
+    - workers-node
+  
