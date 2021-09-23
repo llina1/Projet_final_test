@@ -31,12 +31,10 @@ pipeline{
             }
 
         stage('Test1'){
-            status = 200
+            //status = 200
             steps{
                 script{ 
                 echo 'testing backup1 before starting'
-                //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
-                //def response = sh(script: 'curl $url1', returnStdout: true)
                 status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                 }
             } 
@@ -51,16 +49,6 @@ pipeline{
                             sh "vagrant init"
                             sh "vagrant destroy $backup1"
                             sh "vagrant reload"
-
-                            git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-                            sh "rmdir -r roles"
-                            sh "mkdir roles"
-                            sh "ansible-galaxy install --roles -r requirements.yml"
-                            ansiblePlaybook (
-                                colorized: true,
-                                playbook:" <nom du fichier .yml>",
-                                hostKeyChecking: false,
-                                inventory: "<chemin du fichier dans git>"
                             ) 
                         }
                     }
@@ -86,16 +74,6 @@ pipeline{
                             sh "vagrant init"
                             sh "vagrant destroy $backup2"
                             sh "vagrant reload $backup2"
-
-                            git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-                            sh "rmdir -r roles"
-                            sh "mkdir roles"
-                            sh "ansible-galaxy install --roles -r requirements.yml"
-                            ansiblePlaybook (
-                                colorized: true,
-                                playbook:" <nom du fichier .yml>",
-                                hostKeyChecking: false,
-                                inventory: "<chemin du fichier dans git>"
                             )  
                         }
                 }
@@ -104,11 +82,13 @@ pipeline{
         
         stage('Test5'){
             //node('master backup){ 
-                status = 200
+                //status = 200
                 steps{
-                    echo 'Testing if Master node IP before starting'
-                    //jenkinsPath = sh"whereis jenkins"
-                    status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true) 
+                    script{
+                         echo 'Testing if Master node IP before starting'
+                         status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true) 
+
+                    }    
                 } 
             //} 
         }     
@@ -120,18 +100,7 @@ pipeline{
                         if (status != 200 && status != 201) {   
                             sh "vagrant init"
                             sh "vagrant destroy $virtM2"
-                            sh "vagrant reload $virtM2"
-
-                            git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
-                            sh "rmdir -r roles"
-                            sh "mkdir roles"
-                            sh "ansible-galaxy install --roles -r requirements.yml"
-                            ansiblePlaybook (
-                                colorized: true,
-                                playbook:" <nom du fichier .yml>",
-                                hostKeyChecking: false,
-                                inventory: "<chemin du fichier dans git>"
-                            )        
+                            sh "vagrant reload $virtM2"       
                         }
                     }
                 }
@@ -139,7 +108,7 @@ pipeline{
          stage('Test7'){
             //node('master'){ 
                 steps{
-                     status = 200
+                    //status = 200
                     echo 'Testing Jenkins in Master node'
                     //jenkinsPath = sh"whereis jenkins"
                    
@@ -160,14 +129,6 @@ pipeline{
                 }
             } 
         }               
-                 
-                
-
-        
-         
-
-    
-
 
        /*** stage('testing'){ 
             steps {
