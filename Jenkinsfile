@@ -106,11 +106,12 @@ pipeline{
          stage('Test7'){
             //node('master'){ 
                 steps{
-                    //status = 200
+                    script{
+                        //status = 200
                     echo 'Testing Jenkins in Master node'
                     //jenkinsPath = sh"whereis jenkins"
-                   
-                    status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true) 
+                    status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true)
+                    } 
                 } 
             //} 
         }                        
