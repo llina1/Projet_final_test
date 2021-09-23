@@ -42,9 +42,9 @@ Vagrant.configure(2) do |config|
       end #end provider
 			
 			#for all
-      cfg.vm.provision :shell, :inline => etcHosts
-			cfg.vm.provision :shell, :inline => common
-
+      config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbook/playbook.yml"
+      ansible.inventory_path = "hosts"
     end # end config
   end # end nodes
 end 
