@@ -51,9 +51,10 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {  
-                            sh "vagrant init"
-                            sh "vagrant destroy $backup1"
-                            sh "vagrant reload"
+                            //sh "vagrant init"
+                            //sh "vagrant destroy $backup1"
+                            //sh "vagrant reload"
+                            echo 'test1 completed'
                         }
                     }
             }
@@ -114,9 +115,9 @@ pipeline{
                     script{
                         //status = 200
                     echo 'Testing Jenkins in Master node'
-                        timeout(time: 1, unit:'MINUTES'){
+                        //timeout(time: 1, unit:'MINUTES'){
                             status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true)
-                        }            
+                       //}            
                     } 
                 } 
             //} 
