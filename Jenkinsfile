@@ -159,6 +159,7 @@ pipeline{
                             echo 'Jenkins service running port:8080'
                     }
                 }
+            } 
         }               
                  
                 
@@ -169,7 +170,7 @@ pipeline{
     
 
 
-        stage('testing'){ 
+       /*** stage('testing'){ 
             steps {
                 echo'testing if all nodes are up'
                 script {
@@ -181,7 +182,7 @@ pipeline{
                 } 
             }          
 
-        }         
+        } /***/        
     }
 }
 
