@@ -87,7 +87,7 @@ pipeline{
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
-                         status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true) 
+                         status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true)
 
                     }    
                 } 
