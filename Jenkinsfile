@@ -49,7 +49,6 @@ pipeline{
                             sh "vagrant init"
                             sh "vagrant destroy $backup1"
                             sh "vagrant reload"
-                            ) 
                         }
                     }
             }
@@ -74,7 +73,6 @@ pipeline{
                             sh "vagrant init"
                             sh "vagrant destroy $backup2"
                             sh "vagrant reload $backup2"
-                            )  
                         }
                 }
             }
