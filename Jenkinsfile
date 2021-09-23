@@ -16,7 +16,7 @@
     def urlJenkins2 = url0 + virtM2 + urlJenkins0
     
 pipeline{
-       agent {label 'MasterNode||BackupNode'} 
+       
        //options {
            //timeout(time: 1, unit: 'SECONDS')
        //} 
@@ -29,20 +29,20 @@ pipeline{
                 }
             }
         stage('Test1'){
-          agent {label'MasterNode'}
+          //agent {label'MasterNode'}
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
-                //} 
-            } 
+                } 
+            //} 
           
         } 
-/***
+
         stage('Test2'){ 
-          node('MasterNode'){      
+          //node('MasterNode'){      
             steps{
                 sh "echo $status"
                     script{
@@ -56,22 +56,22 @@ pipeline{
                     }
 
                 }
-            } 
+            //} 
         }             
         
         stage('Test3'){
-          node('MasterNode'){
+          //node('MasterNode'){
             steps{
                 script{ 
                     echo 'testing backup2 before starting'
                     status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)
                 }
             } 
-          } 
+          //} 
         } 
 
         stage('Test4'){ 
-          node('MasterNode'){     
+          //node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
@@ -84,11 +84,11 @@ pipeline{
                         } 
                 }
             }
-          } 
+          //} 
         }             
         
         stage('Test5'){
-            node('BackupNode'){ 
+            //node('BackupNode'){ 
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
@@ -96,10 +96,10 @@ pipeline{
 
                     }    
                 } 
-            } 
+            //} 
         }     
         stage('Test6'){ 
-          node('BackupNode')     
+          //node('BackupNode')     
             steps{
                 sh "echo $status"
                     script{
@@ -141,7 +141,7 @@ pipeline{
           }  
         }               
 
-        stage('Test9'){ 
+        /***stage('Test9'){ 
             steps {
                 echo'testing if all nodes are up'
                 script {
