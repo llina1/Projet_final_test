@@ -137,7 +137,7 @@ pipeline{
             }
           }  
         }               
-/***/
+
         stage('Test9'){ 
             steps {
                 echo'testing if all nodes are up'
@@ -151,11 +151,4 @@ pipeline{
             }          
         }       
     }
-}
-
-                
-            
-         
-    
-
-
+}   
