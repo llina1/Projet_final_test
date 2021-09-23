@@ -1,0 +1,27 @@
+haproxy_default_path: "/etc/default/"
+
+haproxy_default_file: "haproxy"
+
+haproxy_conf_path: "/etc/haproxy/"
+
+haproxy_conf_file: "haproxy.cfg"
+
+scripts_default_path: "/etc/scripts/"
+
+ping_script: "ping.sh"
+
+restart_script: "restart_backup.sh"
+
+vagrant_path: "/etc/vagrant/"
+
+Vagrant_file: "vagrantfile"
+
+default_port: "80"
+
+main-serv:
+
+  - {ip: "172.16.254.252", servername: "USRHapMain"}
+
+server: 
+
+  - {ip: "172.16.249.254", servername: "worker-1"}
