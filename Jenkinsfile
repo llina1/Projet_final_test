@@ -97,7 +97,8 @@ pipeline{
 
                     }    
                 } 
-            } 
+            }
+      }  
       node('BackupNode'){    
         stage('Test6'){ 
                
