@@ -22,7 +22,7 @@ pipeline{
        //} 
 
     stages{
-
+        
         stage('build'){
             steps{ 
                 echo "building the app"  
@@ -30,7 +30,7 @@ pipeline{
                 }
             }
         stage('Test1'){
-            //status = 200
+          node('MasterNode'){
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
@@ -39,16 +39,17 @@ pipeline{
                     }
                 //} 
             } 
+          }
         } 
         stage('Test2'){ 
-          //node('master'){      
+          node('MasterNode'){      
             steps{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {  
-                            //sh "vagrant init"
-                            //sh "vagrant destroy $backup1"
-                            //sh "vagrant reload"
+                            sh "vagrant init"
+                            sh "vagrant destroy $backup1"
+                            sh "vagrant reload"
                         } else {
                             echo 'backup1 is up'
                         } 
@@ -57,7 +58,7 @@ pipeline{
         }             
         
         stage('Test3'){
-          //node('master'){
+          node('MasterNode'){
             steps{
                 script{ 
                     echo 'testing backup2 before starting'
@@ -66,24 +67,25 @@ pipeline{
             } 
         } 
 
-        stage('Test4'){      
+        stage('Test4'){ 
+          node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            //sh "vagrant init"
-                            //sh "vagrant destroy $backup2"
-                            //sh "vagrant reload $backup2"
+                            sh "vagrant init"
+                            sh "vagrant destroy $backup2"
+                            sh "vagrant reload $backup2"
                         } else {
                             echo 'backup2 is up'
                         } 
                 }
             }
+          } 
         }             
         
         stage('Test5'){
-            //node('master backup){ 
-                //status = 200
+            node('BackupNode'){ 
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
@@ -91,17 +93,17 @@ pipeline{
 
                     }    
                 } 
-            //} 
+            } 
         }     
         stage('Test6'){ 
-          //node('master backup')     
+          node('BackupNode')     
             steps{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            //sh "vagrant init"
-                            //sh "vagrant destroy $virtM2"
-                            //sh "vagrant reload $virtM2"       
+                            sh "vagrant init"
+                            sh "vagrant destroy $virtM2"
+                            sh "vagrant reload $virtM2"       
                         } else {
                             echo 'backup1 is up'
                         } 
@@ -109,7 +111,7 @@ pipeline{
                 }
         }             
          stage('Test7'){
-            //node('master'){ 
+            node('MasterNode'){ 
                 steps{
                     script{
                         //status = 200
@@ -122,7 +124,7 @@ pipeline{
             //} 
         }                        
          stage('Test8'){ 
-          //node('master')     
+          node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
@@ -132,21 +134,22 @@ pipeline{
                             echo 'Jenkins service running port:8080'
                     }
                 }
-            } 
+            }
+          }  
         }               
-/***
+/***/
         stage('Test9'){ 
             steps {
                 echo'testing if all nodes are up'
                 script {
                     sh(JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}')
                     nodesReady = sh "kubectl get nodes -o jsonpath="$JSONPATH""
-                    //sh"echo $nodesReady > file2.txt)"
-                    //sh "grep 'Ready=True' file2.txt"
-                    //sh"cat file2.txt"
+                    sh"echo $nodesReady > file2.txt)"
+                    sh "grep 'Ready=True' file2.txt"
+                    sh"cat file2.txt"
                 } 
             }          
-        } /***/       
+        }       
     }
 }
 
