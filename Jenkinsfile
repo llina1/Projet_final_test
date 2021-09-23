@@ -29,8 +29,9 @@ pipeline{
                 //sh "python3 ./app.py"
                 }
             }
-      node('MasterNode'){
+      
         stage('Test1'){
+            node('MasterNode'){
           
             steps{
                 //timeout(time: 1, unit:'MINUTES'){
@@ -38,12 +39,12 @@ pipeline{
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
-                //} 
+                } 
             } 
           }
          
-      //node('MasterNode'){
-        stage('Test2'){  
+        stage('Test2'){ 
+         node('MasterNode'){ 
             steps{
                 sh "echo $status"
                     script{
@@ -58,8 +59,8 @@ pipeline{
 
                 }
             } 
-        //}             
-        
+        }             
+        /***
         stage('Test3'){
           //node('MasterNode'){
             steps{
@@ -86,7 +87,7 @@ pipeline{
                 }
             }
           } 
-        }             
+                     
       node('BackupNode'){ 
         stage('Test5'){
             
@@ -154,6 +155,6 @@ pipeline{
                     sh"cat file2.txt"
                 } 
             }          
-        }       
+        } /***/      
     }
 }   
