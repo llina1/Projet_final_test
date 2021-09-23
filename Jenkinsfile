@@ -16,11 +16,11 @@
     def urlJenkins2 = url0 + virtM2 + urlJenkins0
     
 pipeline{
+    agent any
        
        //options {
            //timeout(time: 1, unit: 'SECONDS')
        //} 
-
     stages{
         stage('build'){
             steps{ 
@@ -127,7 +127,7 @@ pipeline{
             } 
         }                        
          stage('Test8'){ 
-          node('MasterNode'){     
+          //node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
@@ -138,7 +138,7 @@ pipeline{
                     }
                 }
             }
-          }  
+          //}  
         }               
 
         /***stage('Test9'){ 
