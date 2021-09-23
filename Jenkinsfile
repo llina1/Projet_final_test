@@ -153,8 +153,7 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            echo 'Jenkins must be restarted'
-                            )        
+                            echo 'Jenkins must be restarted'      
                         } else {
                             echo 'Jenkins service running port:8080'
                     }
