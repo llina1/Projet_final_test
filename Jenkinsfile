@@ -33,11 +33,11 @@ pipeline{
         stage('Test1'){
          //node ('master'){ 
             steps{
+                status = 200
                 script{ 
                 echo 'testing backup1 before starting'
                 //int status = sh(script: curl -s -o /dev/null -w "%{http_code}" $url1)
                 //def response = sh(script: 'curl $url1', returnStdout: true)
-                status = 200
                 status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                 }
             } 
@@ -50,8 +50,8 @@ pipeline{
                     script{
                         if (status != 200 && status != 201) {  
                             sh "vagrant init"
-                            h "vagrant destroy $backup1"
-                            sh "vagrant reload $backup1"
+                            sh "vagrant destroy $backup1"
+                            sh "vagrant reload"
 
                             git branch: 'master' , url: 'https://github.com/llina1/Projet_final_test.git'
                             sh "rmdir -r roles"
