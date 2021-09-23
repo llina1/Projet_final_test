@@ -54,7 +54,9 @@ pipeline{
                             echo 'backup1 is up'
                         } 
                     }
-            }
+
+                }
+            } 
         }             
         
         stage('Test3'){
@@ -65,6 +67,7 @@ pipeline{
                     status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)
                 }
             } 
+          } 
         } 
 
         stage('Test4'){ 
