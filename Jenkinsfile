@@ -109,8 +109,9 @@ pipeline{
                     script{
                         //status = 200
                     echo 'Testing Jenkins in Master node'
-                    //jenkinsPath = sh"whereis jenkins"
-                    status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true)
+                        timeout(time: 1, unit:'MINUTES'){
+                            status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true)
+                        }            
                     } 
                 } 
             //} 
