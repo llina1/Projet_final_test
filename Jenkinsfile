@@ -40,7 +40,8 @@ pipeline{
                     }
                 } 
             } 
-         }  catch(err){ 
+         }
+       }   catch(err){ 
                 echo "vagrant"
         } 
 
