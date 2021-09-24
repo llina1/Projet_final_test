@@ -29,7 +29,7 @@ pipeline{
                 sh"cat Vagrantfile" 
                 }
             }
-        stage('Test : Bachup1'){
+        stage('Test1 : Bachup1'){
           //agent {label'MasterNode'}
             steps{
             //script{ 
@@ -47,7 +47,7 @@ pipeline{
         } 
         //} 
 
-        stage('Test: Vagrant'){ 
+        stage('Test2: Vagrant'){ 
           //node('MasterNode'){      
             steps{
                 sh "echo $status"
@@ -66,7 +66,7 @@ pipeline{
             //} 
         }             
         
-        stage('Test: Backup2'){
+        stage('Test3: Backup2'){
           //node('MasterNode'){
             steps{
                 script{ 
@@ -77,7 +77,7 @@ pipeline{
           //} 
         } 
 
-        stage('Test: vagrant'){ 
+        stage('Test4: vagrant'){ 
           //node('MasterNode'){     
             steps{
                 sh "echo $status"
@@ -94,7 +94,7 @@ pipeline{
           //} 
         }             
         
-        stage('Test: Node master'){
+        stage('Test5: Node master'){
             //node('BackupNode'){ 
                 steps{
                     script{
@@ -105,7 +105,7 @@ pipeline{
                 } 
             //} 
         }     
-        stage('Test: vagrant'){ 
+        stage('Test6: vagrant'){ 
           //node('BackupNode')     
             steps{
                 sh "echo $status"
@@ -120,7 +120,7 @@ pipeline{
                     }
                 }
         }             
-         stage('Test : Jenkins master node'){
+         stage('Test7 : Jenkins master node'){
             //node('MasterNode'){ 
                 steps{
                     script{
@@ -133,7 +133,7 @@ pipeline{
                 } 
             //} 
         }                        
-         stage('Test: Jenkins response'){ 
+         stage('Test8: Jenkins response'){ 
           //node('MasterNode'){     
             steps{
                 sh "echo $status"
