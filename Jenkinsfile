@@ -47,7 +47,7 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {  
-                            sh "vagrant init"
+                            //h "vagrant init"
                             sh "vagrant destroy $backup1"
                             sh "vagrant reload"
                         } else {
@@ -76,7 +76,7 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            sh "vagrant init"
+                            //sh "vagrant init"
                             sh "vagrant destroy $backup2"
                             sh "vagrant reload $backup2"
                         } else {
@@ -104,7 +104,7 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {   
-                            sh "vagrant init"
+                            //sh "vagrant init"
                             sh "vagrant destroy $virtM2"
                             sh "vagrant reload $virtM2"       
                         } else {
