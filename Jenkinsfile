@@ -32,6 +32,7 @@ pipeline{
         stage('Test1'){
           //agent {label'MasterNode'}
             steps{
+            script{ 
             try{ 
                 timeout(time: 1, unit:'MINUTES'){
                     script{ 
@@ -41,6 +42,7 @@ pipeline{
                 } 
             } catch(err) { 
                 echo "vagrant"
+            } 
             } 
         } 
         } 
