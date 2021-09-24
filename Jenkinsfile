@@ -37,7 +37,7 @@ pipeline{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
-                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1", returnStatus: true)  
+                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1:5000", returnStatus: true)  
                     }
                 } 
             //} catch(err) { 
