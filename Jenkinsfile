@@ -25,20 +25,20 @@ pipeline{
         stage('build'){
             steps{ 
                 echo "building the app"
-                sh "python3 ./app.py"
+                //sh "python3 ./app.py"
                 sh"cat Vagrantfile" 
                 }
             }
         stage('Test1'){
           //agent {label'MasterNode'}
             steps{
-                //timeout(time: 1, unit:'MINUTES'){
+                timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
                 } 
-            //} 
+            } 
           
         } 
 
