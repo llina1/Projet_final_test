@@ -53,9 +53,10 @@ pipeline{
                 sh "echo $status"
                     script{
                         if (status != 200 && status != 201) {  
-                            //h "vagrant init"
+                            //sh "vagrant init"
                             //sh "vagrant destroy $backup1"
                             //sh "vagrant reload"
+                            echo "error"
                         } else {
                             echo 'backup1 is up'
                         } 
