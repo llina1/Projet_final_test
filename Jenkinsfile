@@ -52,7 +52,7 @@ pipeline{
             steps{
                 sh "echo $status"
                     script{
-                        if (status != 200 && status != 201) {  
+                        if (status != 200 && status != 0) {  
                             //sh "vagrant init"
                             //sh "vagrant destroy $backup1"
                             //sh "vagrant reload"
