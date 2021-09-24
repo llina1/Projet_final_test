@@ -41,8 +41,9 @@ pipeline{
                 } 
             } 
          }
-       }   catch(err){ 
+         catch(err){ 
                 echo "vagrant"
+        } 
         } 
 
         stage('Test2'){ 
