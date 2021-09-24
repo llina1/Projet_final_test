@@ -1,7 +1,7 @@
-    def backup1 = "72.16.254.251"
-    def virtM1 = "72.16.254.252"
-    def backup2 = "72.16.254.253"
-    def virtM2 = "72.16.254.254"
+    def backup1 = "172.16.254.251"
+    def virtM1 = "172.16.254.252"
+    def backup2 = "172.16.254.253"
+    def virtM2 = "172.16.254.254"
     def url0 = "http://"
     def url1 = url0 + backup1
     def url2 = url0 + virtM1
