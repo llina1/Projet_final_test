@@ -37,7 +37,7 @@ pipeline{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
-                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1:8080", returnStatus: true)  
+                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)  
                     }
                 } 
             //} catch(err) { 
@@ -47,7 +47,7 @@ pipeline{
         } 
         //} 
 
-        stage('Test2'){ 
+        stage('Test: Vagrant'){ 
           //node('MasterNode'){      
             steps{
                 sh "echo $status"
@@ -66,23 +66,23 @@ pipeline{
             //} 
         }             
         
-        stage('Test3'){
+        stage('Test: Backup2'){
           //node('MasterNode'){
             steps{
                 script{ 
                     echo 'testing backup2 before starting'
-                    status = sh(script:"curl -X POST -i -u admin:admin $url3", returnStatus: true)
+                    status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)
                 }
             } 
           //} 
         } 
 
-        stage('Test4'){ 
+        stage('Test: vagrant'){ 
           //node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
-                        if (status != 200 && status != 201) {   
+                        if (status != 200 && status != 0) {   
                             //sh "vagrant init"
                             //sh "vagrant destroy $backup2"
                             //sh "vagrant reload $backup2"
@@ -94,23 +94,23 @@ pipeline{
           //} 
         }             
         
-        stage('Test5'){
+        stage('Test: Node master'){
             //node('BackupNode'){ 
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
-                         status = sh(script:"curl -X POST -i -u admin:admin $virtM2", returnStatus: true)
+                         status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)
 
                     }    
                 } 
             //} 
         }     
-        stage('Test6'){ 
+        stage('Test: vagrant'){ 
           //node('BackupNode')     
             steps{
                 sh "echo $status"
                     script{
-                        if (status != 200 && status != 201) {   
+                        if (status != 200 && status != 0) {   
                             //sh "vagrant init"
                             //sh "vagrant destroy $virtM2"
                             //sh "vagrant reload $virtM2"       
@@ -120,25 +120,25 @@ pipeline{
                     }
                 }
         }             
-         stage('Test7'){
+         stage('Test : Jenkins master node'){
             //node('MasterNode'){ 
                 steps{
                     script{
                         //status = 200
                     echo 'Testing Jenkins in Master node'
                         //timeout(time: 1, unit:'MINUTES'){
-                            status = sh(script:"curl -X POST -i -u admin:admin $urlJenkins2 ", returnStatus: true)
+                            status = sh(script:"curl -X POST -i -u admin:admin  http://127.0.0.1:8080", returnStatus: true)
                        //}            
                     } 
                 } 
             //} 
         }                        
-         stage('Test8'){ 
+         stage('Test: Jenkins response'){ 
           //node('MasterNode'){     
             steps{
                 sh "echo $status"
                     script{
-                        if (status != 200 && status != 201) {   
+                        if (status != 200 && status != 0) {   
                             echo 'Jenkins must be restarted'      
                         } else {
                             echo 'Jenkins service running port:8080'
