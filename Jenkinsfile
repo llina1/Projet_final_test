@@ -37,7 +37,7 @@ pipeline{
                 //timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
-                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)  
+                        status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1:3000", returnStatus: true)  
                     }
                 } 
             //} catch(err) { 
@@ -71,7 +71,7 @@ pipeline{
             steps{
                 script{ 
                     echo 'testing backup2 before starting'
-                    status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)
+                    status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1:3000", returnStatus: true)
                 }
             } 
           //} 
@@ -99,7 +99,7 @@ pipeline{
                 steps{
                     script{
                          echo 'Testing Master node IP before starting'
-                         status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1/", returnStatus: true)
+                         status = sh(script:"curl -X POST -i -u admin:admin http://127.0.0.1:3000", returnStatus: true)
 
                     }    
                 } 
