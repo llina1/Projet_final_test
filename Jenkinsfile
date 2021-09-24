@@ -114,7 +114,7 @@ pipeline{
                 }
         }             
          stage('Test7'){
-            node('MasterNode'){ 
+            //node('MasterNode'){ 
                 steps{
                     script{
                         //status = 200
