@@ -39,10 +39,9 @@ pipeline{
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
                 } 
-            } 
-         }
-         catch(err){ 
+            } catch(err) { 
                 echo "vagrant"
+            } 
         } 
         } 
 
