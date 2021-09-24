@@ -1,8 +1,0 @@
-all:
- children:
-       webserver:
-         hosts:
-           node[1:2]:
-       dbserver:
-         hosts:
-           node3:
