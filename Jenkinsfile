@@ -32,6 +32,7 @@ pipeline{
         stage('Test1'){
           //agent {label'MasterNode'}
             steps{
+            try{ 
                 timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
@@ -39,7 +40,8 @@ pipeline{
                     }
                 } 
             } 
-          
+         }  catch(err){ 
+                echo "vagrant"
         } 
 
         stage('Test2'){ 
