@@ -25,8 +25,8 @@ pipeline{
         stage('build'){
             steps{ 
                 echo "building the app"
+                sh "python3 ./app.py"
                 sh"cat Vagrantfile" 
-                //sh "python3 ./app.py"
                 }
             }
         stage('Test1'){
