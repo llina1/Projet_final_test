@@ -16,11 +16,9 @@ Vagrant.configure(2) do |config|
 
 	# set servers list and their parameters
 	NODES = [
-  	{ :hostname => "USRHapMain", :ip => "172.16.254.252", :cpus => 1, :mem => 1024 },
-  	{ :hostname => "USRHapFail", :ip => "172.16.254.251", :cpus => 1, :mem => 1024 },
-  	{ :hostname => "MasterNode", :ip => "172.16.250.254", :cpus => 1, :mem => 2048 },
-  	{ :hostname => "BackupNode", :ip => "172.16.250.253", :cpus => 1, :mem => 2048 },
-  	{ :hostname => "WorkersNode", :ip => "172.16.249.254", :cpus => 2, :mem => 2048 },
+  	{ :hostname => "node1", :ip => "192.168.15.10", :cpus => 1, :mem => 1024 },
+  	{ :hostname => "node2", :ip => "192.168.15.11", :cpus => 1, :mem => 1024 },
+  	{ :hostname => "node3", :ip => "192.168.15.12", :cpus => 1, :mem => 1024 }
 	]
 
 	# define /etc/hosts for all servers
@@ -42,10 +40,11 @@ Vagrant.configure(2) do |config|
       end #end provider
 			
 			#for all
-      config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbook/general.yml"
-      ansible.inventory_path = "hosts"
-      end
+      cfg.vm.provision :shell, :inline => etcHosts
+			cfg.vm.provision :shell, :inline => common
+
     end # end config
   end # end nodes
 end 
+
+

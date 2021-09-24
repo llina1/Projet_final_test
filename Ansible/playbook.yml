@@ -1,0 +1,20 @@
+- group:
+   name: admin
+   state: present
+
+- group:
+   name: group_users
+   state: present
+
+
+
+- name: créer un user dans group_users et admin
+   hosts: node1, node2
+   become: yes
+   user:
+     name: apacheadm
+     state: present
+     password: "{{ 'password' | password_hash('sha512') }}"
+     groups : group_users, admin 
+ 
+   
