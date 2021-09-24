@@ -29,23 +29,23 @@ pipeline{
                 sh"cat Vagrantfile" 
                 }
             }
-        stage('Test1'){
+        stage('Test : Bachup1'){
           //agent {label'MasterNode'}
             steps{
-            script{ 
-            try{ 
-                timeout(time: 1, unit:'MINUTES'){
+            //script{ 
+            //try{ 
+                //timeout(time: 1, unit:'MINUTES'){
                     script{ 
                         echo 'testing backup1 before starting'
                         status = sh(script:"curl -X POST -i -u admin:admin $url1", returnStatus: true)  
                     }
                 } 
-            } catch(err) { 
-                echo "vagrant"
-            } 
-            } 
+            //} catch(err) { 
+                
+            //} 
+           // } 
         } 
-        } 
+        //} 
 
         stage('Test2'){ 
           //node('MasterNode'){      
@@ -54,8 +54,8 @@ pipeline{
                     script{
                         if (status != 200 && status != 201) {  
                             //h "vagrant init"
-                            sh "vagrant destroy $backup1"
-                            sh "vagrant reload"
+                            //sh "vagrant destroy $backup1"
+                            //sh "vagrant reload"
                         } else {
                             echo 'backup1 is up'
                         } 
